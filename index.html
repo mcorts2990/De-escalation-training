@@ -58,7 +58,9 @@ body {
   border-left: 5px solid #4dabf7;
   font-size: 15px;
   color: #1c3d6e;
-  line-height: 1.5;
+  line-height: 1.6;
+  max-height: 180px;
+  overflow-y: auto;
 }
 
 .choices button {
@@ -139,37 +141,49 @@ const slides = [
 {
 title:"De-escalation Training",
 text:"Your behavior directly changes the customer’s brain state in real time.",
-brain:"🧠 Humans automatically mirror the emotional tone of others. When someone is angry, your brain is wired to match that energy unless you actively regulate it. This is why escalation spreads so quickly in public settings—and why a calm, controlled response can actually lower the other person’s emotional intensity.",
+brain:`Humans automatically and often unconsciously mirror the emotional tone of others. When someone raises their voice, speeds up their speech, or becomes tense, your brain is wired to match that state unless you actively regulate it.
+
+This is why escalation spreads quickly in public environments. One person’s frustration can amplify another’s. The most effective de-escalators are not just “being nice”—they are actively interrupting this feedback loop by slowing their tone, lowering intensity, and signaling safety.`,
 type:"info"
 },
 
 {
 title:"Scenario: Wrong Order",
 text:"Customer: 'This is WRONG. I've been waiting 15 minutes!'",
-brain:"🧠 The customer’s brain is likely in a threat-detection state. The amygdala becomes more active, which increases emotional intensity and reduces activity in the prefrontal cortex—the area responsible for reasoning and impulse control. This means they are not processing logic well in this moment.",
+brain:`In this moment, the customer’s brain is likely prioritizing threat detection over reasoning. The amygdala becomes more active, increasing emotional intensity and driving reactions like anger or frustration.
+
+At the same time, activity in the prefrontal cortex—responsible for logical thinking, impulse control, and decision-making—decreases. This means the customer is not in a state where they can process explanations, policies, or detailed reasoning effectively.
+
+This is why trying to “explain the situation” too early often makes things worse instead of better.`,
 type:"info"
 },
 
 {
 title:"What do you say first?",
 choices:[
-{t:"What’s wrong with it?", good:false, fb:"Feels dismissive → increases perceived threat"},
+{t:"What’s wrong with it?", good:false, fb:"Feels dismissive → increases threat"},
 {t:"Tell me what happened.", good:true, fb:"Lets them vent → reduces defensiveness"},
-{t:"I’ll fix it.", good:false, fb:"Too fast → they don’t feel heard"}
+{t:"I’ll fix it.", good:false, fb:"Too fast → not heard yet"}
 ]
 },
 
 {
-title:"Why this matters",
-text:"Letting someone explain shifts the interaction.",
-brain:"🧠 When people feel ignored or dismissed, the brain interprets that as a social threat. Giving them space to speak restores a sense of control and reduces defensive activation. This makes them more likely to calm down and cooperate.",
+title:"Why letting them talk works",
+text:"Giving space changes the interaction.",
+brain:`When someone feels ignored or dismissed, the brain interprets that as a social threat. This increases defensive behavior and emotional intensity.
+
+Allowing the customer to explain what happened restores a sense of control. As they talk, emotional intensity often begins to decrease naturally because they are able to process and express the situation.
+
+This shift makes them more receptive to solutions and reduces the likelihood of escalation.`,
 type:"info"
 },
 
 {
 title:"Next moment",
 text:"Customer: 'You people can’t get anything right!'",
-brain:"🧠 Emotional intensity is still high. At this stage, attempts to correct or argue will likely increase escalation rather than reduce it.",
+brain:`At this stage, emotional intensity is still elevated. The brain is still in a reactive state, and attempts to correct the customer or challenge their tone will likely increase defensiveness.
+
+The goal here is not to correct behavior—it is to reduce intensity.`,
 type:"info"
 },
 
@@ -185,7 +199,9 @@ choices:[
 {
 title:"Why labeling works",
 text:"Naming the emotion changes the interaction.",
-brain:"🧠 Research shows that putting feelings into words—called affect labeling—can reduce activity in the amygdala and increase regulation in the prefrontal cortex. In simple terms, naming the emotion helps the brain calm itself.",
+brain:`This technique is known as affect labeling. Research shows that when emotions are put into words, activity in the amygdala decreases while activity in regions involved in regulation increases.
+
+In simple terms, naming the emotion helps the brain shift from reacting to processing. Even though it seems small, saying something like “that’s frustrating” can significantly reduce emotional intensity.`,
 type:"info"
 },
 
@@ -198,23 +214,20 @@ choices:[
 },
 
 {
-title:"Control matters",
+title:"Why control matters",
 text:"Giving options reduces conflict.",
-brain:"🧠 A major driver of anger is perceived loss of control. When people feel they have no say in what happens next, emotional intensity increases. Offering choices restores a sense of agency, which helps reduce frustration quickly.",
-type:"info"
-},
+brain:`A major driver of frustration is perceived loss of control. When people feel stuck or unable to influence what happens next, emotional intensity increases.
 
-{
-title:"Safety escalation",
-text:"Customer pacing, raising voice",
-brain:"🧠 As emotional intensity increases, impulse control decreases. This raises the risk of aggressive behavior. At this point, the priority shifts from solving the problem to maintaining safety.",
+Providing options restores a sense of agency. Even small choices signal to the brain that the situation is manageable and predictable, which reduces stress and helps move the interaction toward resolution.`,
 type:"info"
 },
 
 {
 title:"Key takeaway",
 text:"Slow down • Let them talk • Label emotion • Give options",
-brain:"🧠 In high-stress interactions, you are not just solving a problem—you are actively regulating another person’s nervous system through your behavior.",
+brain:`In high-stress interactions, you are not just solving a problem—you are actively influencing another person’s brain state.
+
+Your tone, pacing, and word choice determine whether the situation escalates or stabilizes.`,
 type:"info"
 }
 
