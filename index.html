@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>De-escalation Training</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #eef2f7, #dfe6f0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 950px;
+  height: 620px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background: #e51636;
+  border-radius: 20px;
+  transition: width 0.4s ease;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #111;
+}
+
+.text {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #333;
+}
+
+.brain {
+  margin-top: 15px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f4f7ff;
+  border-left: 5px solid #4dabf7;
+  font-size: 15px;
+  color: #1c3d6e;
+  line-height: 1.5;
+}
+
+.choices button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #f1f3f5;
+  color: #222;
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.choices button:hover {
+  background: #e51636;
+  color: white;
+}
+
+.feedback {
+  margin-top: 15px;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.good {
+  background: #e6f7ee;
+  color: #1f7a4c;
+}
+
+.bad {
+  background: #fdeaea;
+  color: #b02a2a;
+}
+
+.next {
+  margin-top: 10px;
+  padding: 12px;
+  background: #111;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: none;
+  align-self: flex-end;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="progress" class="progress"></div>
+
+<div>
+  <div id="title" class="title"></div>
+  <div id="text" class="text"></div>
+  <div id="brain" class="brain"></div>
+</div>
+
+<div id="choices" class="choices"></div>
+<div id="feedback" class="feedback"></div>
+
+<button id="next" class="next">Next →</button>
+
+</div>
+
+<script>
+
+let step = 0;
+
+const slides = [
+
+{
+title:"De-escalation Training",
+text:"Your behavior directly changes the customer’s brain state in real time.",
+brain:"🧠 Humans automatically mirror the emotional tone of others. When someone is angry, your brain is wired to match that energy unless you actively regulate it. This is why escalation spreads so quickly in public settings—and why a calm, controlled response can actually lower the other person’s emotional intensity.",
+type:"info"
+},
+
+{
+title:"Scenario: Wrong Order",
+text:"Customer: 'This is WRONG. I've been waiting 15 minutes!'",
+brain:"🧠 The customer’s brain is likely in a threat-detection state. The amygdala becomes more active, which increases emotional intensity and reduces activity in the prefrontal cortex—the area responsible for reasoning and impulse control. This means they are not processing logic well in this moment.",
+type:"info"
+},
+
+{
+title:"What do you say first?",
+choices:[
+{t:"What’s wrong with it?", good:false, fb:"Feels dismissive → increases perceived threat"},
+{t:"Tell me what happened.", good:true, fb:"Lets them vent → reduces defensiveness"},
+{t:"I’ll fix it.", good:false, fb:"Too fast → they don’t feel heard"}
+]
+},
+
+{
+title:"Why this matters",
+text:"Letting someone explain shifts the interaction.",
+brain:"🧠 When people feel ignored or dismissed, the brain interprets that as a social threat. Giving them space to speak restores a sense of control and reduces defensive activation. This makes them more likely to calm down and cooperate.",
+type:"info"
+},
+
+{
+title:"Next moment",
+text:"Customer: 'You people can’t get anything right!'",
+brain:"🧠 Emotional intensity is still high. At this stage, attempts to correct or argue will likely increase escalation rather than reduce it.",
+type:"info"
+},
+
+{
+title:"Best response?",
+choices:[
+{t:"There’s no need to yell.", good:false, fb:"Correction triggers defensiveness"},
+{t:"That’s really frustrating.", good:true, fb:"Emotion labeling reduces intensity"},
+{t:"Let me get a manager.", good:false, fb:"Too early"}
+]
+},
+
+{
+title:"Why labeling works",
+text:"Naming the emotion changes the interaction.",
+brain:"🧠 Research shows that putting feelings into words—called affect labeling—can reduce activity in the amygdala and increase regulation in the prefrontal cortex. In simple terms, naming the emotion helps the brain calm itself.",
+type:"info"
+},
+
+{
+title:"Final step",
+choices:[
+{t:"Remake or refund?", good:true, fb:"Restores control → de-escalates"},
+{t:"I’ll remake it.", good:false, fb:"No control given"}
+]
+},
+
+{
+title:"Control matters",
+text:"Giving options reduces conflict.",
+brain:"🧠 A major driver of anger is perceived loss of control. When people feel they have no say in what happens next, emotional intensity increases. Offering choices restores a sense of agency, which helps reduce frustration quickly.",
+type:"info"
+},
+
+{
+title:"Safety escalation",
+text:"Customer pacing, raising voice",
+brain:"🧠 As emotional intensity increases, impulse control decreases. This raises the risk of aggressive behavior. At this point, the priority shifts from solving the problem to maintaining safety.",
+type:"info"
+},
+
+{
+title:"Key takeaway",
+text:"Slow down • Let them talk • Label emotion • Give options",
+brain:"🧠 In high-stress interactions, you are not just solving a problem—you are actively regulating another person’s nervous system through your behavior.",
+type:"info"
+}
+
+];
+
+function loadSlide() {
+let s = slides[step];
+
+document.getElementById("title").innerText = s.title || "";
+document.getElementById("text").innerText = s.text || "";
+document.getElementById("brain").innerText = s.brain || "";
+document.getElementById("choices").innerHTML = "";
+document.getElementById("feedback").innerText = "";
+document.getElementById("feedback").className = "feedback";
+document.getElementById("next").style.display = "none";
+
+let progressPercent = (step / (slides.length - 1)) * 100;
+document.getElementById("progress").style.width = progressPercent + "%";
+
+if (s.choices) {
+s.choices.forEach(c => {
+let btn = document.createElement("button");
+btn.innerText = c.t;
+btn.onclick = () => {
+document.getElementById("feedback").innerText = c.fb;
+document.getElementById("feedback").classList.add(c.good ? "good" : "bad");
+document.getElementById("next").style.display = "block";
+};
+document.getElementById("choices").appendChild(btn);
+});
+} else {
+document.getElementById("next").style.display = "block";
+}
+}
+
+document.getElementById("next").onclick = () => {
+step++;
+if (step < slides.length) loadSlide();
+};
+
+loadSlide();
+
+</script>
+
+</body>
+</html>
